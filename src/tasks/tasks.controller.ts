@@ -4,6 +4,7 @@ import { CreateTaskDto } from './dto/create-task.dto';
 import { FindTaskDto } from './dto/find-task-dto';
 import { ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { RemoveTaskDto } from './dto/remove-task.dto';
+import { FindManyTaskDto } from './dto/find-many-task-dto';
 
 @ApiTags('tasks')
 @Controller('tasks')
@@ -21,11 +22,21 @@ export class TasksController {
     return await this.tasksService.create(createTaskDto);
   }
 
-  @Get()
-  @ApiOperation({ summary: 'Get all tasks' })
+  @Get('all')
+  @ApiOperation({ deprecated: true, summary: 'Get all tasks' })
   @ApiResponse({ status: 200, description: 'Return all tasks.' })
   async findAll() {
     return await this.tasksService.findAll();
+  }
+
+  @Get()
+  @ApiOperation({ summary: 'Get tasks by filter' })
+  @ApiResponse({
+    status: 200,
+    description: 'Return tasks based on the filter.',
+  })
+  async findManyByFilter(@Query() filter: FindManyTaskDto) {
+    return await this.tasksService.findManyByFilter(filter);
   }
 
   @Get('find')

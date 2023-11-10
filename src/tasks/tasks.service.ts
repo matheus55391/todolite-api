@@ -6,6 +6,7 @@ import { Task } from './entities/task.entity';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { UsersService } from 'src/users/users.service';
 import { FindTaskDto } from './dto/find-task-dto';
+import { FindManyTaskDto } from './dto/find-many-task-dto';
 
 @Injectable()
 export class TasksService {
@@ -30,6 +31,22 @@ export class TasksService {
 
   async findAll(): Promise<Task[]> {
     return await this.taskRepository.find();
+  }
+
+  async findManyByFilter(filter: FindManyTaskDto): Promise<Task[]> {
+    const { userId, ...taskFilterParams } = filter;
+    const taskWhere = {
+      title: taskFilterParams.title,
+    };
+    const userWhere = {
+      id: userId,
+    };
+    return await this.taskRepository.find({
+      where: {
+        ...taskWhere,
+        user: userWhere,
+      },
+    });
   }
 
   async findByFilter(filter: FindTaskDto): Promise<Task | undefined> {

@@ -107,6 +107,21 @@ describe('TasksService', () => {
     });
   });
 
+  describe('findMany', () => {
+    it('should return an array of tasks', async () => {
+      const user = new User('testuser', 'testpassword', 'abc123');
+      const mockTasks = [
+        new Task(user, 'Task 1', 'Description for Task 1', 'abc123'),
+        new Task(user, 'Task 2', 'Description for Task 2', 'abc124'),
+      ];
+      jest.spyOn(taskRepository, 'find').mockResolvedValue(mockTasks);
+
+      const result = await tasksService.findManyByFilter({});
+
+      expect(result).toEqual(mockTasks);
+    });
+  });
+
   describe('findByFilter', () => {
     it('should find a task by filter', async () => {
       const mockFilter: FindTaskDto = {
