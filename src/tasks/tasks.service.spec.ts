@@ -6,7 +6,7 @@ import { getRepositoryToken } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { NotFoundException } from '@nestjs/common';
-import { FindTaskDto } from './dto/find-task-dto';
+import { FindTaskDto } from './dto/find-task.dto';
 import { User } from 'src/users/entities/user.entity';
 
 describe('TasksService', () => {

@@ -5,8 +5,8 @@ import { Repository } from 'typeorm';
 import { Task } from './entities/task.entity';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { UsersService } from 'src/users/users.service';
-import { FindTaskDto } from './dto/find-task-dto';
-import { FindManyTaskDto } from './dto/find-many-task-dto';
+import { FindTaskDto } from './dto/find-task.dto';
+import { FindManyTaskDto } from './dto/find-many-task.dto';
 
 @Injectable()
 export class TasksService {

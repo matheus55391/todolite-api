@@ -1,10 +1,10 @@
 import { Controller, Post, Get, Body, Delete, Query } from '@nestjs/common';
 import { TasksService } from './tasks.service';
 import { CreateTaskDto } from './dto/create-task.dto';
-import { FindTaskDto } from './dto/find-task-dto';
+import { FindTaskDto } from './dto/find-task.dto';
 import { ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { RemoveTaskDto } from './dto/remove-task.dto';
-import { FindManyTaskDto } from './dto/find-many-task-dto';
+import { FindManyTaskDto } from './dto/find-many-task.dto';
 
 @ApiTags('tasks')
 @Controller('tasks')
