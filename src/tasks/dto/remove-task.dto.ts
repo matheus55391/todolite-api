@@ -4,11 +4,11 @@ import { IsString } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class RemoveTaskDto {
-  @ApiProperty({ description: 'ID of the task', example: '1' })
   @IsString()
+  @ApiProperty({ description: 'ID of the task', example: '1' })
   id: string;
 
-  @ApiProperty({ description: 'ID of the user', example: '123' })
   @IsString()
+  @ApiProperty({ description: 'ID of the user', example: '123' })
   userId: string;
 }
