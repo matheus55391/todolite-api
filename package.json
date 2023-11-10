@@ -76,6 +76,12 @@
     "testEnvironment": "node",
     "moduleNameMapper": {
       "^src/(.*)": "<rootDir>/../src/$1"
-    }
+    },
+    "coveragePathIgnorePatterns": [
+      "^.*\\main\\.[jt]sx?$",
+      "^.*\\.module\\.[jt]sx?$",
+      "^.*\\.dto\\.[jt]sx?$",
+      "^.*\\.controller\\.[jt]sx?$"
+    ]
   }
 }
