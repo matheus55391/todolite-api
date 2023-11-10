@@ -1,16 +1,9 @@
-import {
-  Controller,
-  Post,
-  Get,
-  Param,
-  Body,
-  Delete,
-  Query,
-} from '@nestjs/common';
+import { Controller, Post, Get, Body, Delete, Query } from '@nestjs/common';
 import { TasksService } from './tasks.service';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { FindTaskDto } from './dto/find-task-dto';
-import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { RemoveTaskDto } from './dto/remove-task.dto';
 
 @ApiTags('tasks')
 @Controller('tasks')
@@ -23,6 +16,7 @@ export class TasksController {
     status: 201,
     description: 'The task has been successfully created.',
   })
+  @ApiBody({ type: CreateTaskDto })
   async create(@Body() createTaskDto: CreateTaskDto) {
     return await this.tasksService.create(createTaskDto);
   }
@@ -34,7 +28,7 @@ export class TasksController {
     return await this.tasksService.findAll();
   }
 
-  @Get()
+  @Get('find')
   @ApiOperation({ summary: 'Find one task by filter' })
   @ApiResponse({
     status: 200,
@@ -45,13 +39,15 @@ export class TasksController {
     return foundTask;
   }
 
-  @Delete(':id/:userId')
+  @Delete()
   @ApiOperation({ summary: 'Remove a task by ID and user ID' })
   @ApiResponse({
     status: 200,
     description: 'The task has been successfully removed.',
   })
-  async remove(@Param('id') id: string, @Param('userId') userId: string) {
+  @ApiBody({ type: RemoveTaskDto })
+  async remove(@Body() removeTaskDto: RemoveTaskDto) {
+    const { id, userId } = removeTaskDto;
     await this.tasksService.remove(id, userId);
     return { message: 'Task removed successfully' };
   }
