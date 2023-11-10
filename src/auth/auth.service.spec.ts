@@ -40,6 +40,42 @@ describe('AuthService', () => {
     expect(usersService).toBeDefined();
   });
 
+  describe('login', () => {
+    it('should login with valid credentials', async () => {
+      const loginAuthDto: LoginAuthDto = {
+        username: 'testuser',
+        password: 'password123',
+      };
+
+      const loginUser = new User(
+        loginAuthDto.username,
+        loginAuthDto.password,
+        'abc123',
+      );
+
+      jest.spyOn(usersService, 'findByFilter').mockResolvedValueOnce(loginUser);
+
+      const result = await service.login(loginAuthDto);
+
+      expect(result).toEqual(loginUser);
+    });
+
+    it('should throw UnauthorizedException with invalid credentials', async () => {
+      const loginAuthDto: LoginAuthDto = {
+        username: 'testuser',
+        password: 'invalidpassword',
+      };
+
+      jest.spyOn(usersServiceMock, 'findByFilter').mockResolvedValueOnce(null);
+
+      try {
+        await service.login(loginAuthDto);
+      } catch (error) {
+        expect(error).toBeInstanceOf(UnauthorizedException);
+      }
+    });
+  });
+
   describe('register', () => {
     it('should register a new user', async () => {
       const createAuthDto: CreateAuthDto = {
@@ -85,42 +121,6 @@ describe('AuthService', () => {
 
       try {
         await service.register(createAuthDto);
-      } catch (error) {
-        expect(error).toBeInstanceOf(UnauthorizedException);
-      }
-    });
-  });
-
-  describe('login', () => {
-    it('should login with valid credentials', async () => {
-      const loginAuthDto: LoginAuthDto = {
-        username: 'testuser',
-        password: 'password123',
-      };
-
-      const loginUser = new User(
-        loginAuthDto.username,
-        loginAuthDto.password,
-        'abc123',
-      );
-
-      jest.spyOn(usersService, 'findByFilter').mockResolvedValueOnce(loginUser);
-
-      const result = await service.login(loginAuthDto);
-
-      expect(result).toEqual(loginUser);
-    });
-
-    it('should throw UnauthorizedException with invalid credentials', async () => {
-      const loginAuthDto: LoginAuthDto = {
-        username: 'testuser',
-        password: 'invalidpassword',
-      };
-
-      jest.spyOn(usersServiceMock, 'findByFilter').mockResolvedValueOnce(null);
-
-      try {
-        await service.login(loginAuthDto);
       } catch (error) {
         expect(error).toBeInstanceOf(UnauthorizedException);
       }
