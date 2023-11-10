@@ -45,6 +45,10 @@ describe('TasksService', () => {
     usersService = module.get<UsersService>(UsersService);
   });
 
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
   describe('create', () => {
     it('should create a task', async () => {
       const mockUser = {
