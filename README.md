@@ -2,13 +2,9 @@
 
 ## Descrição
 
-A Todolite API é uma aplicação desenvolvida em NestJS, um framework Node.js para construção de aplicações server-side eficientes e escaláveis. Esta API foi criada com o objetivo de fornecer um backend robusto para um aplicativo de lista de tarefas (todolist).
+A Todolite API é uma aplicação desenvolvida em NestJS. 
 
-## Funcionalidades
-
-- **Listagem de Tarefas:** Obtenha uma lista de todas as tarefas cadastradas.
-- **Criação de Tarefas:** Adicione novas tarefas à lista.
-- **Atualização de Tarefas:** Marque tarefas como concluídas ou faça alterações.
+Esta API foi criada com o objetivo de fornecer um backend robusto para um aplicativo de lista de tarefas (todolist).
 
 ## Apresentação Prática sobre TDD e Testes Unitários
 
@@ -18,7 +14,7 @@ Este repositório foi criado como parte de um estudo prático sobre Test-Driven 
 
 1. Clone este repositório: `git clone https://github.com/matheus55391/todolite-api.git`
 2. Instale as dependências: `npm install`
-3. Configure o banco de dados mysql no .env
+3. Configure o banco de dados mysql no arquivo `.env`
 4. Execute a aplicação: `npm run start`
 
 ## Testes Unitários
